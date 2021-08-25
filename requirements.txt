@@ -1,0 +1,5 @@
+opencv-python
+gym[atari]
+tqdm
+pyglet
+scikit-image

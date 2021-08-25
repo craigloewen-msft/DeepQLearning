@@ -1,0 +1,48 @@
+{
+    "name": "Tensorflow Dev Container",
+    "dockerFile": "Dockerfile",
+    // Uncomment this for GPU image
+    "build": {
+        "args": {
+            "IMAGE_TYPE": "-gpu"
+        }
+    },
+    // Set *default* container specific settings.json values on container create.
+    "settings": {
+        "python.testing.pytestEnabled": true,
+        "python.testing.pytestArgs": [
+            "./tensorflow"
+        ],
+        "C_Cpp.clang_format_style": "{BasedOnStyle: Google}",
+        "C_Cpp.default.includePath": [
+            "${workspaceFolder}/**",
+        ],
+        "files.watcherExclude": {
+            "**/bazel-*/**": true
+        },
+        "search.exclude": {
+            "**/bazel-*/**": true
+        }
+    },
+    // Add the IDs of extensions you want installed when the container is created.
+    "extensions": [
+        "ms-python.python",
+        "ms-vscode.cpptools",
+    ],
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [],
+    // Use 'postCreateCommand' to run commands after the container is created.
+    // "postCreateCommand": "uname -a",
+    "mounts": [
+        "source=tensorflow_cache,target=/home/vscode/.cache/bazel/",
+        "type=bind,source=/tmp/.X11-unix,target=/tmp/.X11-unix"
+    ],
+    // Uncomment when using a ptrace-based debugger like C++, Go, and Rust
+    "runArgs": [
+        "--gpus=all",
+
+    ],
+    "containerEnv": {"DISPLAY":"${localEnv:DISPLAY}"},
+    "remoteUser": "root",
+    "postCreateCommand": "pip install -r requirements.txt",
+}
