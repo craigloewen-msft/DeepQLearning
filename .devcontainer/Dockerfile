@@ -37,4 +37,4 @@ ARG COMMON_SCRIPT_SHA="dev-mode"
 #     && apt-get clean -y \
 #     && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install python-opengl git openssh-client openssh-server -y 
+RUN apt-get update && apt-get install python-opengl git openssh-client openssh-server swig -y 

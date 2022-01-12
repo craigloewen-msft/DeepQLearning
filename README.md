@@ -1,16 +1,12 @@
+This is a demo of training an AI to land a simple lunar lander.
+
 This is a project forked from this Github repository:
 https://github.com/boyuanf/DeepQLearning
 
-I've updated it to tensorflow 2, added a duel q network, and some Docker files. 
+And from this one:
+https://github.com/rteshnizi/LunarLander-v2
 
-Thank you boyuanf for creating the project!
-
-# Original README
-
-## DeepQLearning
-Deep Q Learning playing breakout on OpenGym
-
-My version of DQN using Keras and OpenAI Gym, test on AWS Deep Learning AMIs.
+Thank you to boyuanf and rteshnizi for creating these projects!
 
 The training result graph is drawed by Tensorboard.
 

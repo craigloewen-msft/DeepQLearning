@@ -3,3 +3,4 @@ gym[atari]
 tqdm
 pyglet
 scikit-image
+box2d-py
