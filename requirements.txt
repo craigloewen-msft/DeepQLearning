@@ -1,6 +1,7 @@
 opencv-python
-gym[atari]
+gym[atari]==0.25.2
 tqdm
 pyglet
 scikit-image
 box2d-py
+pygame
