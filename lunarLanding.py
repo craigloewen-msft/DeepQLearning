@@ -46,37 +46,37 @@ class Dqn(ModelBase):
 
 
 class LanderBrain:
-    def __init__(self):
-        self.GAMMA = 0.99
-        self.EPS_MAX = 1.0
-        self.EPS_MIN = 0.01
-        self.ADJUSTER = 0.9995
-        self.EXPERIENCE_RELAY_SIZE = 100000
-        self.BATCH_SIZE = 512
-        self.TARGET_NET_UPDATE_FREQ = 1
-        self.SAVE_FREQ = 25
-        self.WEIGHTS_FILE_NAME = "weights"
-        now = datetime.utcnow().strftime("%Y%m%d%H%M%S")
-        self.DIR_NAME = "{}/run-{}-log".format(LOG_DIR, now)
-        self.LOG_FILE = None
 
-        self.epsilon = self.EPS_MAX
-        self.experienceRelay = deque(maxlen=self.EXPERIENCE_RELAY_SIZE)
-        self.model = Dqn()
-        self.target = Dqn()
-        self.loss = tf.keras.losses.MeanSquaredError()
-        self.optimizer = tf.keras.optimizers.Adam(learning_rate=0.0001)
-        self.trainLoss = tf.keras.metrics.Mean(name='train_loss')
-        self.tfLogger = self._initLogger()
+    def __init__(self, loadPath=None, loadEpisode=None):
+        if loadPath is None and loadEpisode is None:
+            self.GAMMA = 0.99
+            self.EPS_MAX = 1.0
+            self.EPS_MIN = 0.01
+            self.ADJUSTER = 0.9995
+            self.EXPERIENCE_RELAY_SIZE = 100000
+            self.BATCH_SIZE = 512
+            self.TARGET_NET_UPDATE_FREQ = 1
+            self.SAVE_FREQ = 25
+            self.WEIGHTS_FILE_NAME = "weights"
+            now = datetime.utcnow().strftime("%Y%m%d%H%M%S")
+            self.DIR_NAME = "{}/run-{}-log".format(LOG_DIR, now)
+            self.LOG_FILE = None
 
-    # Functions for testing
+            self.epsilon = self.EPS_MAX
+            self.experienceRelay = deque(maxlen=self.EXPERIENCE_RELAY_SIZE)
+            self.model = Dqn()
+            self.target = Dqn()
+            self.loss = tf.keras.losses.MeanSquaredError()
+            self.optimizer = tf.keras.optimizers.Adam(learning_rate=0.0001)
+            self.trainLoss = tf.keras.metrics.Mean(name='train_loss')
+            self.tfLogger = self._initLogger()
+        else:
+            # Functions for testing
+            self.WEIGHTS_FILE_NAME = "weights"
+            self.DIR_NAME = loadPath
 
-    def __init__(self, loadPath, loadEpisode):
-        self.WEIGHTS_FILE_NAME = "weights"
-        self.DIR_NAME = loadPath
-
-        self.model = Dqn()
-        self._load(loadEpisode)
+            self.model = Dqn()
+            self._load(loadEpisode)
 
     def _reshapeState(self, state):
         return tf.reshape(state, [1, STATE_SPACE_SIZE])
